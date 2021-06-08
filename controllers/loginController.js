@@ -1,4 +1,4 @@
-var userModel = require('../models/user');
+var User = require('../models/user');
 var genToken = require('../passport');
 
 var loginController = {

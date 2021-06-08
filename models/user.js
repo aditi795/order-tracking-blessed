@@ -20,6 +20,7 @@ const User = sequelize.define(
       validate: {
         isEmail: true,
       },
+      primaryKey: true
     },
     user_password: {
       type: DataTypes.STRING(1000),
@@ -31,13 +32,22 @@ const User = sequelize.define(
     },
   },
 
-  {}
+  {
+    timestamps:false,
+  }
   
 );
 
-module.exports.authenticateUser = (email, password) =>{
-    user = User.findByPk(email);
-    return user.password === password;
+module.exports.authenticateUser = async (email, password) =>{
+    user = await User.findOne({where: {email: email}});
+    //console.log(user);
+    //console.log(password);
+    if(user.dataValues.user_password === password){
+      return user.dataValues;
+    }
+    else{
+      throw("error");
+    };
 }
     
   

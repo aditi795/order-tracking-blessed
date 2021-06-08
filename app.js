@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const user = require('./models/user')
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const genToken = require('./passport')
+const cookieParser = require('cookie-parser')
 
 const app = express();
 const port = 3000;
@@ -11,7 +12,10 @@ const port = 3000;
 const urlParser = bodyparser.urlencoded({extended:true});
 
 app.use(urlParser);
+app.use(cookieParser);
+//app.use(passport.initialize());
 
+require('./passport-config')(passport);
 
 const indexRouter = require('./routes/index');
 const productsRouter = require('./routes/products');
