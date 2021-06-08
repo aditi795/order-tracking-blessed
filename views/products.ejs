@@ -20,6 +20,24 @@
         <li><a href="/products">Go to products page</a></li>
     </ul>
 
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <h1>MODAL</h1>
+            <p>seeing if this will display</p>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Save changes</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -39,9 +57,21 @@
                 <% if(products.length> 0){ %>
 
                     <% for ( var i=0 ; i < products.length ; i++){ %>
+
                         <tr>
                             <td>
-                                <%= products[i].product_id%>
+                                <script>
+                                    function showDetails(id){
+                                        console.log(`you clicked on product ${id}`);
+                                        //toggle showing popup form with product details
+                                        const modal = document.getElementsByClassName("modal");
+                                        console.log(modal);
+                                        modal.className += " is-active";
+                                    }
+                                </script>
+                                <a onClick="showDetails('<%- products[i].product_id%>')">
+                                    <%= products[i].product_id%>
+                                </a>
                             </td>
                             <td>
                                 <%= products[i].SKU%>
