@@ -46,7 +46,6 @@ module.exports.deleteItem = (o_id, p_id, cb) => {
     })
 };
 
-
 /* Foreign Key shenanigans
 to be implemented later
 
