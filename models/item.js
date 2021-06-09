@@ -21,6 +21,32 @@ const Item = sequelize.define(
   }
 );
 
+module.exports.addItem = (item, cb)=>{
+    Items.create({ 
+      order_id: item.order_id,
+      product_id: item.product_id,
+      quantity: item.quantity,
+     })
+      .then(created => {
+        cb(null, created);
+      })
+      .catch(error => {
+        cb(error, null);
+      })
+};
+
+module.exports.deleteItem = (o_id, p_id, cb) => {
+    Item.destroy({ 
+        where: { 
+            order_id: o_id,
+            p_id:  p_id,
+        } })
+    .then((created) => {
+      cb(null, created);
+    })
+};
+
+
 /* Foreign Key shenanigans
 to be implemented later
 
